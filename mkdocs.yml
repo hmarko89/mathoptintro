@@ -1,0 +1,70 @@
+site_name: A Practical Introduction to the Theory of Mathematical Optimization
+site_url: https://elte-oszm.github.io
+
+nav:
+  - Home: index.md
+ # - Introduction:
+ #   - Machine scheduling: intro/scheduling.md
+ # - Linear programming:
+ #   - Introduction: lp/lp.md
+ # - Integer programming:
+ #   - Introduction:                mip/mip.md
+ #   - n-queens:                    mip/queens.md
+ #   - Sudoku:                      mip/sudoku.md
+ #   - Travelling Salesman Problem: mip/tsp.md
+ #   - Single Machine Scheduling:   mip/smsp.md
+ #   - Parallel Machine Scheduling: mip/upmsp.md
+ # - Puzzles:
+ #   - Thermometers: puzzles/thermometers.md
+ # - Tags: tags.md
+  - For my students 🇭🇺: elte.md
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/theme-light-dark
+        name: Switch to dark-mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/theme-light-dark
+        name: Switch to light-mode
+
+plugins:
+  - search
+  - tags:
+      tags_file: tags.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - def_list
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.details
+
+extra_javascript:
+  - assets/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - assets/extra.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
