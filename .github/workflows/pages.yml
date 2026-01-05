@@ -52,3 +52,5 @@ jobs:
           personal_token: ${{ secrets.GH_PAGES_TOKEN }}
           publish_dir: ./site
           publish_branch: gh-pages
+          force_orphan: true 
+          commit_message: "Force deploy: ${{ github.sha }}"
