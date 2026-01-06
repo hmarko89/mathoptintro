@@ -3,6 +3,9 @@ site_url: https://hmarko89.github.io/mathoptintro/
 
 nav:
   - Home: index.md
+  - Constraint Programming:
+    - Introduction: cp/cp.md
+    - Sudoku:       cp/sudoku.md
  # - Introduction:
  #   - Machine scheduling: intro/scheduling.md
  # - Linear programming:
