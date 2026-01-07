@@ -51,3 +51,9 @@ article, .md-content, .md-typeset, .wy-nav-content, .wy-nav-content-inner {
   max-width: 100% !important;
   height: auto !important;
 }
+
+/* force monospace for all pre/code in admonitions */
+.md-typeset pre code {
+    font-family: monospace !important;
+    white-space: pre !important;
+}

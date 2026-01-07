@@ -3,11 +3,13 @@ site_url: https://hmarko89.github.io/mathoptintro/
 
 nav:
   - Home: index.md
+  - Some optimization problems:
+    - Machine scheduling: intro/scheduling.md
   - Constraint Programming:
-    - Introduction: cp/cp.md
-    - Sudoku:       cp/sudoku.md
- # - Introduction:
- #   - Machine scheduling: intro/scheduling.md
+    - Introduction:       cp/cp.md
+    - Sudoku:             cp/sudoku.md
+    - n-queens:           cp/queens.md
+    - Machine scheduling: cp/scheduling.md
  # - Linear programming:
  #   - Introduction: lp/lp.md
  # - Integer programming:

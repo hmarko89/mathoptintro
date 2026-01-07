@@ -11,26 +11,26 @@ Play online: [www.puzzle-sudoku.com](https://www.puzzle-sudoku.com/)
 ## Rules
 
 There is a *grid* of size $9\times 9$.
-The goal is to write a number from $1,\ldots,9$ in each cell, such that each column, each row, and each of the nine $3\times 3$ subgrids that compose the grid contains all numbers.
+The goal is to write a number from $1,\ldots,9$ in each cell, such that each column, each row, and each of the nine $3\times 3$ subgrids that compose the grid contains all numbers exactly once.
 Some numbers are pre-given.
 
-!!! example "Example"
-    ```
-    Task:                         Solution:
-    ┌───────┬───────┬───────┐     ┌───────┬───────┬───────┐
-    │ · · 4 │ 6 · · │ 3 5 · │     │ 2 1 4 │ 6 8 7 │ 3 5 9 │
-    │ · · · │ · · 4 │ · · 7 │     │ 5 9 3 │ 1 2 4 │ 6 8 7 │
-    │ 8 · · │ 5 · · │ · · 2 │     │ 8 6 7 │ 5 3 9 │ 1 4 2 │
-    ├───────┼───────┼───────┤     ├───────┼───────┼───────┤
-    │ 1 · 5 │ 3 · · │ · 6 · │     │ 1 7 5 │ 3 4 2 │ 9 6 8 │
-    │ · · · │ · · · │ · · · │     │ 4 8 2 │ 7 9 6 │ 5 1 3 │
-    │ · 3 · │ · · 1 │ 2 · 4 │     │ 6 3 9 │ 8 5 1 │ 2 7 4 │
-    ├───────┼───────┼───────┤     ├───────┼───────┼───────┤
-    │ 7 · · │ · · 3 │ · · 1 │     │ 7 5 8 │ 2 6 3 │ 4 9 1 │
-    │ 3 · · │ 9 · · │ · · · │     │ 3 4 6 │ 9 1 8 │ 7 2 5 │
-    │ · 2 1 │ · · 5 │ 8 · · │     │ 9 2 1 │ 4 7 5 │ 8 3 6 │
-    └───────┴───────┴───────┘     └───────┴───────┴───────┘
-    ```
+For example:
+```text
+Task:                         Solution:
+┌───────┬───────┬───────┐     ┌───────┬───────┬───────┐
+│ · · 4 │ 6 · · │ 3 5 · │     │ 2 1 4 │ 6 8 7 │ 3 5 9 │
+│ · · · │ · · 4 │ · · 7 │     │ 5 9 3 │ 1 2 4 │ 6 8 7 │
+│ 8 · · │ 5 · · │ · · 2 │     │ 8 6 7 │ 5 3 9 │ 1 4 2 │
+├───────┼───────┼───────┤     ├───────┼───────┼───────┤
+│ 1 · 5 │ 3 · · │ · 6 · │     │ 1 7 5 │ 3 4 2 │ 9 6 8 │
+│ · · · │ · · · │ · · · │     │ 4 8 2 │ 7 9 6 │ 5 1 3 │
+│ · 3 · │ · · 1 │ 2 · 4 │     │ 6 3 9 │ 8 5 1 │ 2 7 4 │
+├───────┼───────┼───────┤     ├───────┼───────┼───────┤
+│ 7 · · │ · · 3 │ · · 1 │     │ 7 5 8 │ 2 6 3 │ 4 9 1 │
+│ 3 · · │ 9 · · │ · · · │     │ 3 4 6 │ 9 1 8 │ 7 2 5 │
+│ · 2 1 │ · · 5 │ 8 · · │     │ 9 2 1 │ 4 7 5 │ 8 3 6 │
+└───────┴───────┴───────┘     └───────┴───────┴───────┘
+```
 
 ## CP formulation
 
@@ -40,7 +40,15 @@ Let $G_{ij}$ denote the pre-given number for cell $(i,j)$, if any, otherwise $G_
 ### Variables
 
 Let variable $\mathbf{x}_{ij}$ indicate the number written into cell $(i,j)$.
-If cell $(i,j)$ is empty, the corresponding domain is $D_{i,j} = \{1,\ldots,9\}$, otherwise the variable is fixed to he given value, that is, $D_{i,j} = \{ G_{ij} \}$.
+If cell $(i,j)$ is empty, the corresponding domain is $\{1,\ldots,9\}$, otherwise the variable is fixed to he given value.
+
+$$
+D_{ij} = 
+\begin{cases}
+\{G_{ij}\}     & \text{if }G_{ij} \neq \emptyset\\
+\{1,\ldots,9\} & \text{otherwise}
+\end{cases}
+$$
 
 ### Constraints
 
@@ -59,7 +67,7 @@ $$
 Each number occurs exactly once in a subgrid:
 
 $$
-\operatorname{alldifferent}( \mathbf{x}_{i + i',j+j'} : i' = 0,\ldots,2,\ j' = 0,\ldots,2 )\quad \text{for all}\ i = 1,\ldots,3,\ j = 1,\ldots,3
+\operatorname{alldifferent}( \mathbf{x}_{i + i',j+j'} : i' = 0,1,2,\ j' = 0,1,2 )\quad \text{for all}\ i = 1,4,9,\ j = 1,4,9
 $$
 
 ### Objective
@@ -67,6 +75,8 @@ $$
 There is no objective, since it is a feasibility problem.
 
 ## Implementation
+
+For the full code, see file `src/cp/sudoku.py`.
 
 ### Input format
 
@@ -83,7 +93,7 @@ For example, ```'b4_6b'```.
 
 The following function decodes such a string:
 ```python
-def __decode_sudoku_string( task:str ) -> list[list[int]]:
+def _decode_sudoku_string( task:str ) -> list[list[int]]:
     """
     Decodes the given instance for Sudoku.
     
@@ -99,7 +109,7 @@ def __decode_sudoku_string( task:str ) -> list[list[int]]:
     -------
     grid : list[list[int]]
         A 9x9 Sudoku grid as a list of row-lists.
-        Pre-given cells are integers, empty cells are None.
+        Filled cells are integers, empty cells are None.
     """
     cells = []
 
@@ -107,56 +117,15 @@ def __decode_sudoku_string( task:str ) -> list[list[int]]:
         if char.isnumeric():
             cells.append( int(char) )
         elif char.isalpha():
-            cells.extend( [None] * (ord(char) - 96 ) )
+            cells.extend( None for _ in range(96,ord(char)) )
         elif char == '_':
             continue
         else:
             raise ValueError( f'could not decode task "{task}" due to unexpected character: "{char}"' )
 
-    if len(cells) != 81:
-        raise ValueError( f'could not decode task "{task}" successfully' )
+    assert len(cells) == 81, f'could not decode task "{task}" succesfully'
 
     return [ cells[9*i:9*(i+1)] for i in range(9) ]
-```
-
-The following function prints a task (or a solution) in a more-or-less fancy way:
-
-```python
-def __print_sudoku( grid:list[list[int]] ) -> None:
-    """
-    Prints the given instance/solution for Sudoku.
-    
-    Parameters
-    ----------
-    grid : list[list[int]]
-        A 9x9 Sudoku grid as a list of row-lists.
-        Pre-given cells are integers, empty cells are None.
-    """
-    EMPTY_CHAR = '·' 
-
-    for i in range(10):
-        if i == 0:
-            print( '┌───────┬───────┬───────┐' )
-
-        elif i in [3,6]:
-            print( '├───────┼───────┼───────┤' )
-
-        elif i == 9:
-            print( '└───────┴───────┴───────┘' )
-            break
-
-        for j in range(10):
-            if j == 0:
-                print( '│', end= '' )
-
-            elif j in [3,6]:
-                print( ' │', end= '' )
-
-            elif j == 9:
-                print( ' │' )
-                break
-
-            print( f' {grid[i][j] if grid[i][j] is not None else EMPTY_CHAR}', end= '' )
 ```
 
 ### Output format
@@ -208,20 +177,61 @@ def __encode_sudoku_grid( grid:list[list]) -> str:
     return task
 ```
 
-### Solver
+### Drawing the puzzle
 
-We use ```Python-MIP``` for the implementation.
+The following function prints a task/solution in a more-or-less fancy way:
 
 ```python
-import mip
+def _print_sudoku( grid:list[list[int]] ) -> None:
+    """
+    Prints the given instance/solution for Sudoku.
+    
+    Args
+    ----
+    grid : list[list[int]]
+        A 9x9 Sudoku grid as a list of row-lists.
+        Filled cells are integers, empty cells are None.
+    """
+    CHARS = '·' # empty 
+
+    for i in range(10):
+        if i == 0:
+            print( '┌───────┬───────┬───────┐' )
+
+        elif i in [3,6]:
+            print( '├───────┼───────┼───────┤' )
+
+        elif i == 9:
+            print( '└───────┴───────┴───────┘' )
+            break
+
+        for j in range(10):
+            if j == 0:
+                print( '│', end= '' )
+
+            elif j in [3,6]:
+                print( ' │', end= '' )
+
+            elif j == 9:
+                print( ' │' )
+                break
+
+            print( f' {grid[i][j] if grid[i][j] != None else CHARS[0]}', end= '' )
+```
+
+### Solver
+
+We use the package ```ortools.sat.python.cp_model``` for the implementation.
+
+```python
 import itertools as it
 
-def __solve_sudoku( grid:list[list[int]] ) -> list[list[int]]:
+def _solve_sudoku( grid:list[list[int]] ) -> list[list[int]]:
     """
-    Solves Sudoku.
+    Solves Sudoku as CP with OR-Tools CP-SAT Solver.
     
-    Parameters
-    ----------
+    Args
+    ----
     grid : list[list[int]]
         A 9x9 Sudoku grid as a list of row-lists.
         Filled cells are integers, empty cells are None.
@@ -231,47 +241,43 @@ def __solve_sudoku( grid:list[list[int]] ) -> list[list[int]]:
     grid : list[list[int]]
         A 9x9 Sudoku grid as a list of row-lists.
     """
+    from ortools.sat.python import cp_model
+
     n = 3 
-    N = range(0,n*n)
+    N = range(n*n)
 
     assert len(grid) == n*n, 'invalid matrix size!'
 
     # BUILD MODEL
-    model = mip.Model( 'sudoku' )
+    model = cp_model.CpModel()
 
-    # variables - indicating if number k is written into cell (i,j)
-    x = [ [ [ model.add_var( name= f'x_{i}_{j}_{k}', var_type= mip.BINARY ) for k in N ] for j in N ] for i in N ]
+    # variables: x[i][j] = the number written into cell (i,j)
+    x = [ [ model.new_int_var( 1, n*n, f'x_{i}_{j}' ) for j in N ] for i in N ]
 
-    # constraints - exactly one number in a cell
-    for (i,j) in it.product(N,N):
-        model += mip.xsum( x[i][j][k] for k in N ) == 1
-    
-    # constraints - each number occurs exactly once in a row
-    for (i,k) in it.product(N,N):
-        model += mip.xsum( x[i][j][k] for j in N ) == 1
-
-    # constraints - each number occurs exactly once in a column
-    for (j,k) in it.product(N,N):
-        model += mip.xsum( x[i][j][k] for i in N ) == 1
-
-    # constraints - each number occurs exactly once in a 3x3 subgrid
-    for (gi,gj,k) in it.product( range(n), range(n), N ):
-        model += mip.xsum( x[i][j][k] for (i,j) in it.product( range(n*gi,n*(gi+1)), range(n*gj,n*(gj+1)) ) ) == 1
-
-    # constraints (lower bounds) - pre-given numbers
+    # constraints: pre-given numbers
     for (i,j) in it.product(N,N):
         if grid[i][j] != None:
-            x[i][j][grid[i][j]-1].lb = 1
+            model.add( x[i][j] == grid[i][j] )
+    
+    # constraints: each number occurs exactly once in a row
+    for i in N:
+        model.add_all_different( x[i][j] for j in N )
+
+    # constraints: each number occurs exactly once in a column
+    for j in N:
+        model.add_all_different( x[i][j] for i in N )
+
+    # constraints: each number occurs exactly once in a 3x3 subgrid
+    for (p,q) in it.product(range(n),range(n)):
+       model.add_all_different( x[i+n*p][j+n*q] for (i,j) in it.product(range(n),range(n)) )
 
     # SOLVE PROBLEM
-    model.verbose = 0   # turn off log
-    model.objective = 0 # no objective
-    model.optimize()
+    solver = cp_model.CpSolver()
+    status = solver.solve( model )
+    assert status == cp_model.OPTIMAL, f'status: {solver.status_name(status)}'
 
     # return solution
-    assert model.status == mip.OptimizationStatus.OPTIMAL, f'optimization status: {model.status.name}'
-
-    return [ [ int(sum( round(x[i][j][k].x)*(k+1) for k in N )) for j in N ] for i in N ]
+    return [ [ solver.value(x[i][j]) for j in N ] for i in N ]
 ```
 
 The wrapper function (from string to string):
@@ -279,35 +285,41 @@ The wrapper function (from string to string):
 ```python
 def solve_sudoku( task:str, print_task:bool= False, print_solution:bool= False ) -> str:
     """
-    Solves Sudoku.
+    Solves Sudoku as CP with OR-Tools CP-SAT Solver.
     
-    Parameters
-    ----------
-    task: str
-        An instance for Sudoku encoded as a string
+    Args
+    ----
+    task : str
+        An instance for Sudoku encoded as a string, where:
+        - digits '1'-'9' represent filled cells
+        - letters 'a'-'z' represent consecutive empty cells
+        - optional underscores '_' may be used to separate digits
     
-    print_task: bool
+    print_task : bool
         Should we print task?
     
-    print_solution: bool
+    print_solution : bool
         Should we print solution?
 
     Returns
     -------
-    solution: str
-        The solution encoded as a string
+    solution : str
+        The string that encodes the solution, where:
+        - digits '1'-'9' represent filled cells
+        - letters 'a'-'z' represent consecutive empty cells
+        - optional underscores '_' may be used to separate digits
     """
     # process (and print) task
-    grid = __decode_sudoku_string( task )
+    grid = _decode_sudoku_string( task )
     if print_task:
-        __print_sudoku( grid )
+        _print_sudoku( grid )
 
-    # solve (and print) task
-    solution = __solve_sudoku( grid )
+    # solve problem (and print solution)
+    solution = _solve_sudoku( grid )
     if print_solution:
-        __print_sudoku( solution )
+        _print_sudoku( solution )
 
-    return __encode_sudoku_grid( solution )
+    return _encode_sudoku_grid( solution )
 ```
 
 An example:

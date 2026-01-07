@@ -2,7 +2,7 @@
 
 If you have ever solved a *Sudoku* puzzle, you will find it easy to understand the basics of **constraint programming** (*CP*).
 
-??? example "Solving Sudoku puzzles"
+??? example "Sudoku – How to solve it on paper?"
     In sudoku, there is a partially filled grid of size $9\times 9$.
     The goal is to write a number from $1,\ldots,9$ in each empty cell, such that each column, each row, and each of the nine $3\times 3$ subgrids that compose the grid contains all numbers from $1,\ldots,9$ exactly once.
 
@@ -41,12 +41,14 @@ We distinguish three categories of constraints:
     \operatorname{alldifferent}(\mathbf{x}_{i_1},\ldots,\mathbf{x}_{i_m}) \longleftrightarrow \left( (\mathbf{x}_{i_1},\ldots,\mathbf{x}_{i_m}), \left\{ (d_{i_1},\ldots,d_{i_m}) \subseteq D_{i_1} \times \ldots \times D_{i_m} : j\neq k \Rightarrow d_{i_j} \neq d_{i_k} \right\} \right)
     $$
 
+    Check the `alldifferent` constraint in the [Global Constraint Catalog](https://sofdem.github.io/gccat/gccat/Calldifferent.html#uid13010).
+
 A **solution** for the CSP is a total assignement $(d_1,\ldots,d_n)$ of values to variables such that:
 
 - the values are selected from the domains, that is, $d_i \in D_i$ holds for $i=1,\ldots,n$, and
 - each constraint $((\mathbf{x}_{i_1},\ldots,\mathbf{x}_{i_m}),R)\subseteq \mathcal{C}$ is satisfied, that is, $(d_{i_1},\ldots,d_{i_m}) \in R$.
 
-??? example "Modeling Sudoku as a CSP"
+??? example "Sudoku – Modelling as a CSP"
     Note that this brief introduction is already enough to model Sudoku as a CSP.
     Each cell is associated with a variable, such that empty cell variables have domain $\{1,\ldots,9\}$, while pre-filled cell variables are fixed to their given value.
     For each row, each column, and each subgrid, we impose an `alldifferent` constraint to ensure that all numbers are distinct.
@@ -62,7 +64,7 @@ Whenever the domain of a variable changes, the propagators of all constraints co
 It can happen that, at the end of this propagator-avalanche, a variable's domain becomes empty, which proves that the problem has no solution.
 Otherwise, we say that all constraints — and therefore the whole problem — are *locally consistent*.
 
-??? example "Propagating in Sudoku"
+??? example "Sudoku – Propagating"
     The tactic we used in Sudoku to eliminate impossible values from cells is basically the propagators of the `alldifferent` constraints in action.
 
 ### Local consistency
@@ -85,8 +87,7 @@ In other words, no value in any variable's domain can be removed based on this c
     \]
 
     Clearly, $x_i$ cannot be 0 or 1 because of the first constraint, and it cannot be 5 because of the second constraint.
-
-    After propagation, the variable's domain is reduced, and both constraints are node-consistent.
+    After propagation, the variable's domain is reduced, and both constraints are **node-consistent**.
 
 !!! note "Arc consistency ($m=2$)"
     \[
@@ -103,8 +104,8 @@ In other words, no value in any variable's domain can be removed based on this c
     \]
     
     Clearly, $x_i$ cannot be even.
-    Then the domain of $x_j can also be reduced, because for values $0,1,5$ there is no suitable value for $x_i$ that satisfies the constraint.
-    After this propagation, the constraint is arc-consistent.
+    Then the domain of $x_j$ can also be reduced, because for values $0,1,5$ there is no suitable value for $x_i$ that satisfies the constraint.
+    After this propagation, the constraint is **arc-consistent**.
 
 !!! note "Local consistency for the `alldifferent` constraint"
     The `alldifferent` constraint can be represented as a bipartite graph: variable nodes correspond to the variables, value nodes correspond to the possible values, and a variable node is connected to a value node if that value is in the variable's domain.
@@ -122,6 +123,6 @@ If, at the end of propagation, every variable's domain contains exactly one valu
 Otherwise, propagation must be embedded into a **tree search** scheme, meaning that the problem has to be split into multiple subproblems (branches).
 For example, if a variable $x_i$ has $k$ possible values, say $D_i=\{d_1,\ldots,d_k\}$, we can create $k$ branches, and in the $j$th branch, we require that $x_i = d_j$.
 
-??? example "Branch-and-Propagate for Sudoku"
+??? example "Sudoku – Branch-and-Propagate"
     When we "guessed" in Sudoku — i.e., checked what would happen if we wrote a chosen number into a cell — we were basically performing a branching.
     
