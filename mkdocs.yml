@@ -3,7 +3,8 @@ site_url: https://hmarko89.github.io/mathoptintro/
 
 nav:
   - Home: index.md
-  - Some optimization problems:
+  - Optimization problems:
+    - Introduction:       intro/optimization.md
     - Machine scheduling: intro/scheduling.md
   - Constraint Programming:
     - Introduction:       cp/cp.md
@@ -19,8 +20,7 @@ nav:
  #   - Travelling Salesman Problem: mip/tsp.md
  #   - Single Machine Scheduling:   mip/smsp.md
  #   - Parallel Machine Scheduling: mip/upmsp.md
- # - Puzzles:
- #   - Thermometers: puzzles/thermometers.md
+  - Puzzles: puzzles/puzzles.md
  # - Tags: tags.md
   - For my students 🇭🇺: elte.md
 

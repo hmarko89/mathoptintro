@@ -1,4 +1,4 @@
-# ELTE Operációkutatás Számítógépes Módszerei
+# Operációkutatás Számítógépes Módszerei (ELTE 2025/26 tavasz)
 
 ## A tárgy célja
 

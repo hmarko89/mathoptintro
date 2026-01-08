@@ -64,3 +64,6 @@ The objective is to minimize the weighted sum of completion times:
 $$
 \operatorname{minimize} \sum_{j\in \mathcal{J}} w_j\mathbf{C}_j
 $$
+
+## Implementation
+

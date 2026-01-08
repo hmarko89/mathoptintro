@@ -11,30 +11,13 @@ These can be easily installed using the following command:
 python -m pip install ortools
 ```
 
-## Optimization
+The source codes are available at [https://github.com/hmarko89/mathoptintro](https://github.com/hmarko89/mathoptintro/tree/master/src/).
 
-Roughly speaking, optimization is about finding the best possible solution that satisfies certain requirements.
+!!! tip "Why python?"
 
-Formally, if $\mathcal{S}$ is the *set of feasible solutions*, where each $S \in \mathcal{S}$ *solution* has a *cost* $c(S)$, then minimization can be expressed as:
+!!! tip "Why Google OR-Tools CP-SAT Solver?"
+    Google OR-Tools CP-SAT is one of the leading constraint programming solvers.
+    Over the past two years, OR-Tools CP-SAT has won in all categories of [The MiniZinc Challenge](https://www.minizinc.org/challenge/), an annual competition where CP solvers are tested on a wide variety of benchmark problems.
 
-$$
-\operatorname{minimize} \{ c(S) : S \in \mathcal{S} \}
-$$
-
-In many *graph optimization problems*, feasible solutions are certain subsets of edges that satisfy a prescribed combinatorial structure.
-Let $G=(V,E)$ be a graph with a cost function $c: E\to \mathbb{R}$ defined on the edges.
-For any subset $S \subseteq E$ of edges, let $c(S) := \sum_{e\in S}c(e)$.
-For example, in the shortest path problem, the goal is to find a minimum-cost path between two designated nodes $s$ and $t$.
-In this case, $\mathcal{S}$ is the set of all $s-t$ paths in $G$.
-In the *traveling salesman problem*, $\mathcal{S}$ is the set of all Hamiltonian cycles of the graph.
-
-In **mathematical optimization**, the set of feasible solutions is decribed using *variables* and *constraints*.
-In constraing programming, constraints are typically logical conditions, while in integer programming, constraints are expressed as linear inequalities.
-
-### Constraint programming
-
-
-
-### Integer programming
-
-
+!!! tip "Why Google OR-Tools MathOpt?"
+    

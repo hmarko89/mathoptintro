@@ -13,7 +13,7 @@ For example, $1|r_j|L_{\max}$ denotes the single machine problem, where each job
     In Annals of discrete mathematics (Vol. 5, pp. 287-326). Elsevier.
 
 !!! tip "The Scheduling Zoo"
-    There is an excellent website where you can look up the complexity of scheduling problems: [The Scheduling Zoo](https://schedulingzoo.lip6.fr/]).
+    There is an excellent website where you can look up the complexity of scheduling problems: [The Scheduling Zoo](https://schedulingzoo.lip6.fr/).
 
 ## Machine environment ($\alpha$)
 
