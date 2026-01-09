@@ -1,0 +1,1 @@
+{"mappings": [{"item": {"url": "cp/queens/", "title": "n-queens"}, "tags": ["cp", "puzzle"]}, {"item": {"url": "cp/scheduling/", "title": "Machine scheduling"}, "tags": ["cp", "scheduling"]}, {"item": {"url": "cp/sudoku/", "title": "Sudoku"}, "tags": ["cp", "puzzle"]}]}
