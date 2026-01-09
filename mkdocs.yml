@@ -6,14 +6,14 @@ nav:
   - Optimization problems:
     - Introduction:       intro/optimization.md
     - Machine scheduling: intro/scheduling.md
-  - Constraint Programming:
+  - Constraint Programming (CP):
     - Introduction:       cp/cp.md
     - Sudoku:             cp/sudoku.md
     - n-queens:           cp/queens.md
     - Machine scheduling: cp/scheduling.md
  # - Linear programming:
  #   - Introduction: lp/lp.md
- # - Integer programming:
+ # - Integer programming (MIP):
  #   - Introduction:                mip/mip.md
  #   - n-queens:                    mip/queens.md
  #   - Sudoku:                      mip/sudoku.md

@@ -8,22 +8,22 @@ Play online: [https://www.puzzle-kakurasu.com/](https://www.puzzle-kakurasu.com/
 
 **Kakurasu.**
 Given an $n\times n$ grid with target values assigned to each row and column.
-The goal is to select (for example, shade) some cells so that the sum of the indices of the selected cells in every row and column matches the given target values.
+The goal is to mark (for example, shade) some cells so that the sum of the indices of the marked cells in every row and column matches the given target values.
 
 
 ```text
 Instance:         Solution:      
     1 2 3 4           1 2 3 4    
   ┌─────────┐       ┌─────────┐  
-1 │         │ 5   1 │ ×     × │ 5
-2 │         │ 4   2 │       × │ 4
+1 │         │ 5   1 │ ×     × │ 5   indices: top and left
+2 │         │ 4   2 │       × │ 4   target values: bottom and right
 3 │         │ 2   3 │   ×     │ 2
 4 │         │ 8   4 │ ×   × × │ 8
   └─────────┘       └─────────┘  
     5 3 4 7           5 3 4 7    
 ```
 
-Kakurasu instances are encoded as strings that consist of the target values for columns (from left to right) and for rows (from top to bottom) separated by slashes (`'/'`).
+Kakurasu instances are encoded as strings that consist of the target values for columns (from left to right) and for rows (from top to bottom) separated by slashes `'/'`.
 For example, the instance shown above is encoded as:
 ```python
 kakurasu_instance = '5/3/4/7/5/4/2/8'
@@ -37,8 +37,8 @@ Play online: [https://www.puzzle-skyscrapers.com/](https://www.puzzle-skyscraper
 Given an $n\times n$ grid with clues along the edges (top, bottom, left, right) and some pre-filled cells.
 The goal is to fill the remaining cells with numbers $1,\ldots,n$ – representing skyscrapers of that heights – such that:
 
-- Each number appears exactly once in every row and every column.
-- Each edge clue indicates how many skyscrapers are visible from that direction in the corresponding row or column.
+- each number appears exactly once in every row and every column;
+- each edge clue indicates how many skyscrapers are visible from that direction in the corresponding row or column.
 Note that a taller skyscraper blocks the view of any shorter skyscraper behind it.
 
 ```text
