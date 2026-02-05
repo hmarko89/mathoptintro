@@ -1,0 +1,56 @@
+name: Deploy MkDocs site
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Cache pip
+        run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: ~/.cache
+          restore-keys: |
+            mkdocs-material-
+
+      - name: Install MkDocs and Material
+        run: |
+          pip install mkdocs
+          pip install mkdocs-material
+          pip install mkdocs-pymdownx-material-extras
+
+      - name: Build MkDocs site
+        run: mkdocs build
+
+      - name: Disable Jekyll
+        run: touch site/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          force_orphan: true 
+          commit_message: "Force deploy: ${{ github.sha }}"
