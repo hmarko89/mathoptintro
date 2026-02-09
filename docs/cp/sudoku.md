@@ -6,7 +6,7 @@ tags:
 
 # Sudoku
 
-Play online: [www.puzzle-sudoku.com](https://www.puzzle-sudoku.com/)
+Play online: <a href="https://www.puzzle-sudoku.com/" target="_blank">www.puzzle-sudoku.com</a>
 
 ## Rules
 
@@ -76,7 +76,7 @@ There is no objective, since it is a feasibility problem.
 
 ## Implementation
 
-For the full code, see file `src/cp/sudoku.py`.
+For the full code, see file <a href="https://github.com/hmarko89/mathoptintro/blob/master/src/sudoku.py" target="_blank">`src/sudoku.py`</a>.
 
 ### Input format
 

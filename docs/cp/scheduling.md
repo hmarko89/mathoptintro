@@ -69,7 +69,7 @@ $$
 
 ## Implementation
 
-For the full code, see file `src/cp/scheduling.py`.
+For the full code, see file <a href="https://github.com/hmarko89/mathoptintro/blob/master/src/scheduling.py" target="_blank">`src/scheduling.py`</a>.
 
 ```python
 def schedule_jobs_on_a_single_machine( processing_times:list[int], weights:list[int], release_times:list[int] ) -> None:

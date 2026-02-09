@@ -30,6 +30,6 @@ python -m pip install ortools
     At the same time, the interface between the two enables advanced algorithmic features.
     The underlying solver can be easily switched (e.g., SCIP, HiGHS, Gurobi (license required)), and it is possible to implement methods such as column generation or branch-and-cut in a solver-independent way.
 
-    As an alternative, the [https://www.python-mip.com/](`Python-MIP`) package can also be used.
+    As an alternative, the <a href="https://www.python-mip.com/" target="_blank">`Python-MIP`</a> package can also be used.
     It serves a similar purpose, but supports fewer solvers (CBC and Gurobi), offers fewer callback mechanisms, and is developed less actively.
     

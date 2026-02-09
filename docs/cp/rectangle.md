@@ -49,7 +49,7 @@ Otherwise, one can maximize the number of packed rectangles, which requires addi
 
 ## Implementation
 
-See file `src/cp/rectangle.py` for the full implementation.
+For the full code, see file <a href="https://github.com/hmarko89/mathoptintro/blob/master/src/rectangle.py" target="_blank">`src/rectangle.py`</a>.
 
 ```python
 def solve_rectangle_packing_without_rotation( container:tuple[int,int], rectangles:list[tuple[int,int]] ) -> None:

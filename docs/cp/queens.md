@@ -63,7 +63,7 @@ Note that the problem is infeasible for certain values of $n$ (for example, $n=2
 
 ## Implementation
 
-For the full code, see file `src/cp/queens.py`.
+For the full code, see file <a href="https://github.com/hmarko89/mathoptintro/blob/master/src/queens.py" target="_blank">`src/queens.py`</a>.
 
 ```python
 from ortools.sat.python import cp_model
