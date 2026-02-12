@@ -25,7 +25,7 @@ Pázmány-nap (tanítási szünet): 2026. május 8. (péntek)
 Utolsó tanítási nap: 2026. május 16. (szombat)
 -->
 
-Csütörtök 8:15-9:45, D 3.105 (Grafika labor) | **Ha valaki a saját laptopján szeretné az órai munkát végezni, nyugodtan hozza magával. Sőt!**
+**Csütörtök 8:30-10:00**, D 3.105 (Grafika labor) | **Ha valaki a saját laptopján szeretné az órai munkát végezni, nyugodtan hozza magával. Sőt!**
 
 **<p style="text-decoration: line-through">[1] 2026.02.05. (Regisztrációs időszak)</p>**
 
