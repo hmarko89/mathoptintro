@@ -1,0 +1,1014 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://hmarko89.github.io/mathoptintro/cp/cp/">
+      
+      
+        <link rel="prev" href="../../intro/scheduling/">
+      
+      
+        <link rel="next" href="../sudoku/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Introduction - A Practical Introduction to the Theory of Mathematical Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-constraint-programming" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="A Practical Introduction to the Theory of Mathematical Optimization" class="md-header__button md-logo" aria-label="A Practical Introduction to the Theory of Mathematical Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            A Practical Introduction to the Theory of Mathematical Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to dark-mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark-mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light-mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light-mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="A Practical Introduction to the Theory of Mathematical Optimization" class="md-nav__button md-logo" aria-label="A Practical Introduction to the Theory of Mathematical Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    A Practical Introduction to the Theory of Mathematical Optimization
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization problems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimization problems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../intro/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../intro/scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constraint Programming (CP)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Constraint Programming (CP)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#constraint-satisfaction-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraint Satisfaction Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#propagators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propagators
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Propagators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local consistency
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branch-and-propagate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch-and-Propagate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimization
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sudoku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sudoku
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    n-queens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rectangle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rectangle packing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../puzzles/puzzles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Puzzles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elte/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    For my students 🇭🇺
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#constraint-satisfaction-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraint Satisfaction Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#propagators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propagators
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Propagators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local consistency
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branch-and-propagate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch-and-Propagate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimization
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="introduction-to-constraint-programming">Introduction to Constraint Programming<a class="headerlink" href="#introduction-to-constraint-programming" title="Permanent link">&para;</a></h1>
+<p>If you have ever solved a <em>Sudoku</em> puzzle, you will find it easy to understand the basics of <strong>constraint programming</strong> (<em>CP</em>).</p>
+<details class="example">
+<summary>Sudoku – How to solve it on paper?</summary>
+<p>In sudoku, there is a partially filled grid of size <span class="arithmatex">\(9\times 9\)</span>.
+The goal is to write a number from <span class="arithmatex">\(1,\ldots,9\)</span> in each empty cell, such that each column, each row, and each of the nine <span class="arithmatex">\(3\times 3\)</span> subgrids that compose the grid contains all numbers from <span class="arithmatex">\(1,\ldots,9\)</span> exactly once.</p>
+<p>So, how would you solve such a puzzle?
+I bet you grab a pencil (recommended only for printed version!) and write the remaining possible values for each empty cell in small writing.
+For example, if a number, say 4, is definitely placed in a cell, then the number 4 can be removed from the possible values of the cells in the same row, in the same column, and in the same subgrid.
+If a cell ends up with only one possible value, you can write that value boldy.
+Depending on the difficulty of the puzzle, you may eventually reach a point where this tactic is no longer sufficient to continue solving.</p>
+<p>However, you can also try to eliminate impossible values using a bit of logic plus some courage and a dash of luck.
+Pick a cell, write one of the remaining candidate numbers lightly, and see what happens when you apply the previous elimination tactics again.
+If you are lucky, you will quickly find out whether you made a bad choice: some contradiction will appear — for example, a cell ends up with no valid values left according to the rules.
+In that case, you can safely remove the number you just tried from the cell’s possible candidates.
+If you do not get lost in the bookkeeping, this "trial and error" strategy will guarantee the solution to the puzzle.</p>
+<p>This solving strategy sketched for Sudoku is pretty close to the classic way CP solvers tackle problems.</p>
+</details>
+<h2 id="constraint-satisfaction-problem">Constraint Satisfaction Problem<a class="headerlink" href="#constraint-satisfaction-problem" title="Permanent link">&para;</a></h2>
+<p>A <strong>constraint satisfaction problem</strong> (<em>CSP</em>) is defined as a triplet <span class="arithmatex">\((\mathcal{X},\mathcal{D},\mathcal{C})\)</span>, where:</p>
+<ul>
+<li><span class="arithmatex">\(\mathcal{X}=(\mathbf{x}_1,\ldots,\mathbf{x}_n)\)</span> is a set of <strong>variables</strong>;</li>
+<li><span class="arithmatex">\(\mathcal{D}=(D_1,\ldots,D_n)\)</span> is the set of <strong>domains</strong> of the variables; and</li>
+<li><span class="arithmatex">\(\mathcal{C}\)</span> is a finite set of <strong>constraints</strong>.</li>
+</ul>
+<p>A constraint <span class="arithmatex">\((X,R)\)</span> is defined by a set <span class="arithmatex">\(X = \{ \mathbf{x}_{i_1},\ldots,\mathbf{x}_{i_m} \} \subseteq \mathcal{X}\)</span> of variables and a <strong>relation</strong> <span class="arithmatex">\(R \subseteq D_{i_1} \times \ldots \times D_{i_m}\)</span> that defines the set of values allowed simultaneously for those variables.
+We distinguish three categories of constraints:</p>
+<ul>
+<li><strong>Extensional constraints</strong> are defined by explicitly listing all allowed combinations of values for the involved variables.</li>
+<li><strong>Arithmetic constraints</strong> are defined by an arithmetic expression (<span class="arithmatex">\(&lt;\)</span>, <span class="arithmatex">\(\leq\)</span>, <span class="arithmatex">\(&gt;\)</span>, <span class="arithmatex">\(\geq\)</span>, <span class="arithmatex">\(=\)</span>, <span class="arithmatex">\(\neq\)</span>, etc.).</li>
+<li><strong>Logical constraints</strong> are defined with an explicit logical semantics.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">The <code>alldifferent</code> constraint</p>
+<p>The <code>alldifferent</code> logical constraint requires that the given variables take pairwise distinct values:</p>
+<div class="arithmatex">\[
+\operatorname{alldifferent}(\mathbf{x}_{i_1},\ldots,\mathbf{x}_{i_m}) \longleftrightarrow \left( (\mathbf{x}_{i_1},\ldots,\mathbf{x}_{i_m}), \left\{ (d_{i_1},\ldots,d_{i_m}) \subseteq D_{i_1} \times \ldots \times D_{i_m} : j\neq k \Rightarrow d_{i_j} \neq d_{i_k} \right\} \right)
+\]</div>
+<p>Check the <code>alldifferent</code> constraint in the <a href="https://sofdem.github.io/gccat/gccat/Calldifferent.html#uid13010">Global Constraint Catalog</a>.</p>
+</div>
+<p>A <strong>solution</strong> for the CSP is a total assignement <span class="arithmatex">\((d_1,\ldots,d_n)\)</span> of values to variables such that:</p>
+<ul>
+<li>the values are selected from the domains, that is, <span class="arithmatex">\(d_i \in D_i\)</span> holds for <span class="arithmatex">\(i=1,\ldots,n\)</span>; and</li>
+<li>each constraint <span class="arithmatex">\(((\mathbf{x}_{i_1},\ldots,\mathbf{x}_{i_m}),R)\subseteq \mathcal{C}\)</span> is satisfied, that is, <span class="arithmatex">\((d_{i_1},\ldots,d_{i_m}) \in R\)</span>.</li>
+</ul>
+<details class="example">
+<summary>Sudoku – Modelling as a CSP</summary>
+<p>Note that this brief introduction is already enough to model Sudoku as a CSP.
+Each cell is associated with a variable, such that empty cell variables have domain <span class="arithmatex">\(\{1,\ldots,9\}\)</span>, while pre-filled cell variables are fixed to their given value.
+For each row, each column, and each subgrid, we impose an <code>alldifferent</code> constraint to ensure that all numbers are distinct.</p>
+<p>For details, see <a href="../sudoku/">the next page</a>.</p>
+</details>
+<h2 id="propagators">Propagators<a class="headerlink" href="#propagators" title="Permanent link">&para;</a></h2>
+<p>Each constraint is associated with a <strong>propagator</strong>, which is a process that tries to shrink the domains of the variables involved in that constraint — in other words, it removes values that cannot appear in any solution.</p>
+<p>Whenever the domain of a variable changes, the propagators of all constraints containing that variable are triggered, which may in turn trigger more propagator calls, and so on...</p>
+<p>It can happen that, at the end of this propagator-avalanche, a variable's domain becomes empty, which proves that the problem has no solution.
+Otherwise, we say that all constraints — and therefore the whole problem — are <em>locally consistent</em>.</p>
+<details class="example">
+<summary>Sudoku – Propagating</summary>
+<p>The tactic we used in Sudoku to eliminate impossible values from cells is basically the propagators of the <code>alldifferent</code> constraints in action.</p>
+</details>
+<h3 id="local-consistency">Local consistency<a class="headerlink" href="#local-consistency" title="Permanent link">&para;</a></h3>
+<p>A constraint <span class="arithmatex">\(((\mathbf{x}_{i_1},\ldots,\mathbf{x}_{i_m}),R)\)</span> over <span class="arithmatex">\(m\)</span> variables is <strong>hyper-arc consistent</strong> if for every variable <span class="arithmatex">\(\mathbf{x}_{i_k}\)</span> (<span class="arithmatex">\(1\leq k\leq m\)</span>) and for every value <span class="arithmatex">\(d \in D_{i_k}\)</span> in its domain, there exists a feasible assignment <span class="arithmatex">\((d_{i_1},\ldots,d_{i_m}) \in R\)</span> with <span class="arithmatex">\(d_{i_k} = d\)</span>.
+In other words, no value in any variable's domain can be removed based on this constraint alone.</p>
+<div class="admonition note">
+<p class="admonition-title">Node consistency (<span class="arithmatex">\(m=1\)</span>)</p>
+<div class="arithmatex">\[
+  \left.\begin{array}{r}
+  1 &lt; x_i\\
+  x_i \leq 4\\
+  x_i \in \{0,1,2,3,4,5\}
+  \end{array}\right\}\quad\Rightarrow
+  \left.\begin{array}{r}
+  1 &lt; x_i\\
+  x_i \leq 4\\
+  x_i \in \{2,3,4\}
+  \end{array}\right\}
+\]</div>
+<p>Clearly, <span class="arithmatex">\(x_i\)</span> cannot be 0 or 1 because of the first constraint, and it cannot be 5 because of the second constraint.
+After propagation, the variable's domain is reduced, and both constraints are <strong>node-consistent</strong>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Arc consistency (<span class="arithmatex">\(m=2\)</span>)</p>
+<div class="arithmatex">\[
+  \left.\begin{array}{r}
+  x_i + 2x_j = 9\\
+  x_i \in \{0,1,2,3,4,5\}\\
+  x_j \in \{0,1,2,3,4,5\}
+  \end{array}\right\}\quad\Rightarrow
+  \left.\begin{array}{r}
+  x_i + 2x_j = 9\\
+  x_i \in \{1,3,5\}\\
+  x_j \in \{2,3,4\}
+  \end{array}\right\}
+\]</div>
+<p>Clearly, <span class="arithmatex">\(x_i\)</span> cannot be even.
+Then the domain of <span class="arithmatex">\(x_j\)</span> can also be reduced, because for values <span class="arithmatex">\(0,1,5\)</span> there is no suitable value for <span class="arithmatex">\(x_i\)</span> that satisfies the constraint.
+After this propagation, the constraint is <strong>arc-consistent</strong>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Local consistency for the <code>alldifferent</code> constraint</p>
+<p>The <code>alldifferent</code> constraint can be represented as a bipartite graph: variable nodes correspond to the variables, value nodes correspond to the possible values, and a variable node is connected to a value node if that value is in the variable's domain.</p>
+<p>Each matching that covers all variable nodes corresponds to a feasible assignment, and vice versa.</p>
+<p>Propagation: edges that do not appear in any matching can be removed, reducing the domains of the variables.</p>
+</div>
+<h2 id="branch-and-propagate">Branch-and-Propagate<a class="headerlink" href="#branch-and-propagate" title="Permanent link">&para;</a></h2>
+<p>If during propagation the domain of any variable becomes empty, it is proven that the problem has no solution.</p>
+<p>If, at the end of propagation, every variable's domain contains exactly one value, then that is the solution.</p>
+<p>Otherwise, propagation must be embedded into a <strong>tree search</strong> scheme, meaning that the problem has to be split into multiple subproblems (branches).
+For example, if a variable <span class="arithmatex">\(x_i\)</span> has <span class="arithmatex">\(k\)</span> possible values, say <span class="arithmatex">\(D_i=\{d_1,\ldots,d_k\}\)</span>, we can create <span class="arithmatex">\(k\)</span> branches, and in the <span class="arithmatex">\(j\)</span>th branch, we require that <span class="arithmatex">\(x_i = d_j\)</span>.</p>
+<details class="example">
+<summary>Sudoku – Branch-and-Propagate</summary>
+<p>When we "guessed" in Sudoku — i.e., checked what would happen if we wrote a chosen number into a cell — we were basically performing a branching.</p>
+</details>
+<h2 id="optimization">Optimization<a class="headerlink" href="#optimization" title="Permanent link">&para;</a></h2>
+<p>So far, we have not discussed optimization; we were only looking for a feasible solution.
+But what if we have an objective function?
+This can be handled in several ways, for example by an iterative approach: once a feasible solution is found, in the next iteration we add a constraint requiring the objective function value to be better than in the previous solution.
+For example, <a href="https://deepwiki.com/google/or-tools/4.1-cp-sat-constraint-programming-solver" target="_blank">OR-Tools CP-SAT</a> is a hybrid solver as it combines techniques from constraint programming, SAT solving, and mixed-integer programming.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../assets/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
