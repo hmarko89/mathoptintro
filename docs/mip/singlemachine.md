@@ -138,4 +138,4 @@ Therefore, if $k\in S$, then $j\in S$ for every job $j$ such that $\bar{C}_j \le
 
 ## Implementation
 
-The implementation can be found in <a href="https://github.com/hmarko89/mathoptintro/blob/master/src/single_machine.py" target="_blank">`single_machine.py`</a>
+The implementation can be found in <a href="https://github.com/hmarko89/mathoptintro/blob/master/src/singlemachine.py" target="_blank">`singlemachine.py`</a>
