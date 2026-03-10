@@ -45,8 +45,7 @@ Also note that the feasible region is unbounded, thus, maximizing an objective f
 
 ## MIP formulation
 
-The description of the set of feasible solutions in the previous section almost gives us a MIP formulation.
-The only problem is that the disjunctive constraints are not linear, however, we can use big-M constraints.
+We use big-M constraints to linearize the disjunctive constraints.
 
 ### Variables
 

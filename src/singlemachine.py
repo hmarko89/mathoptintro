@@ -30,7 +30,6 @@ def _log( model:mathopt.Model, result:mathopt.SolveResult, *, ncuts:int= 0 ) -> 
     ]
     print( ' │ '.join(buffer) )
 
-
 class SchedulingCutSeparator:
     """
     Callable class to seperate the parallel inequalities.
