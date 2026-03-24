@@ -88,6 +88,9 @@ Utolsó tanítási nap: 2026. május 16. (szombat)
 **Egészértékű programozás**: oszlopgenerálás a ládapakolási feladatra.<br>
 <span style="font-size: 90%; font-style: italic">column generation</span>
 
+<a href="https://github.com/hmarko89/mathoptintro/blob/master/src/binpacking.py" target="_blank">`binpacking.py`</a>
+(<a href="https://github.com/hmarko89/mathoptintro/blob/master/src/packing_instances.py" target="_blank">`packing_instances.py`</a>)
+
 **<p style="text-decoration: line-through">[9] 2026.04.02. (Tavaszi szünet)</p>**
 
 **[10] 2026.04.09.**
