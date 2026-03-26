@@ -1,7 +1,7 @@
 from ortools.math_opt.python import mathopt
 
 # EXERCISES:
-# 1. Terminate the column generation procedure if the improvement in the last ite
+# 1. Terminate the column generation procedure if the improvement in the last x iterations is under a tolerance. 
 # 2. Use the packing obtained with the first-fit-decreasing procedure as in initial packing for column generation.
 # 3. Implement the natural MIP formulation for the problem.
 
@@ -70,7 +70,7 @@ def column_generation_binpacking( capacity:int, items:list[int], initial_packing
 
     # initial variables
     # NOTE: use integers instead of binaries to avoid problems with handling upper bounds
-    x = [ model.add_variable( lb= 0, ub= 1, name= f'x{j}' ) for j in range(len(initial_columns)) ]
+    x = [ model.add_variable( lb= 0, name= f'x{j}' ) for j in range(len(initial_columns)) ]
 
     # initial constraints
     conss = [ model.add_linear_constraint( 1 <= sum( x[j] * column[i] for j, column in enumerate(initial_columns) ), name= f'cover{i}' ) for i in N ]
@@ -98,7 +98,7 @@ def column_generation_binpacking( capacity:int, items:list[int], initial_packing
         if sub_objval <= 1 + 1e-6:
             break
 
-        x_new = model.add_variable( lb= 0, ub= 1, name= f'x{len(x)}' )
+        x_new = model.add_variable( lb= 0, name= f'x{len(x)}' )
         for j in N:
             conss[j].set_coefficient( x_new, column[j] )
         model.objective.add_linear( x_new )
@@ -118,10 +118,7 @@ def column_generation_binpacking( capacity:int, items:list[int], initial_packing
 if __name__ == '__main__':
     from packing_instances import random_binpacking_instance_triplets
 
-    items, capacity = random_binpacking_instance_triplets( t= 20 )
-    
-    #capacity = 1000
-    #items = [ 495, 474, 473, 472, 466, 450, 445, 444, 439, 430, 419, 414, 410, 395, 372, 370, 366, 366, 366, 363, 361, 357, 355, 351, 350, 350, 347, 320, 315, 307, 303, 299, 298, 298, 292, 288, 287, 283, 275, 275, 274, 273, 273, 272, 272, 271, 269, 269, 268, 263, 262, 261, 259, 258, 255, 254, 252, 252, 252, 251 ]
+    items, capacity = random_binpacking_instance_triplets( t= 20 ) # NOTE: the optimal number of bins equals to t
 
     ffd_bins = first_fit_decreasing( capacity, items )
     print( f'[First Fit Decreasing] Number of bins used: {len(ffd_bins)}' )

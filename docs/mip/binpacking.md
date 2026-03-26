@@ -99,7 +99,9 @@ Moreover, any integer set-covering solution can be converted into a feasible set
 
 Second, the dual variables corresponding to the covering constraints are nonnegative, which leads to a particularly convenient pricing problem.
 
-Third, if we solve the final integer problem only on the generated column set, the set-partitioning model may become infeasible because some necessary columns were never generated.
+Third, since there are no upper bounds $\mathbf{x}_p \leq 1$, there are no dual variables for them.
+
+Finally, if we solve the final integer problem only on the generated column set, the set-partitioning model may become infeasible because some necessary columns were never generated.
 The set-covering version is more robust in this respect, since it may still admit a feasible solution on the restricted column set.
 
 After the column generation phase terminates, the generated columns can be used in a final integer optimization model, typically over the restricted column set.
