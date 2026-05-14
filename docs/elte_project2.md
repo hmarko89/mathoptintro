@@ -141,11 +141,11 @@ A driver-feasible subset of trips is called *duty*.
 
 ### Auxiliary graph
 
-We define a directed graph $D=(V,A)$ as follows:
+We define a directed graph as follows:
 
-- $V$ is the set of locations. Two special nodes, $s$ and $t$, represent the same depot (start and end of a shift).
-- For each trip, there is an arc from the corresponding origin node to the corresponding destination node.
+- For each trip, there is an origin node and a destination node, and an arc from the origin to the destination.
   The length of such an arc equals the duration of the trip.
+- There are two special nodes, $s$ and $t$, that represent the same depot (start and end of a shift).
 - For each trip, there is an arc from node $s$ to its origin node, and an arc from its destination node to node $t$.
   The lengths of these arcs equal the travel time between the corresponding locations.
 - For each pair of trips, there is an arc from the destination of the first trip to the origin of the second trip if they can be performed in this order.
