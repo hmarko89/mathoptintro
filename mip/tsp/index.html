@@ -1,0 +1,1774 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://hmarko89.github.io/mathoptintro/mip/tsp/">
+      
+      
+        <link rel="prev" href="../queens/">
+      
+      
+        <link rel="next" href="../singlemachine/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Travelling Salesman Problem - A Practical Introduction to the Theory of Mathematical Optimization</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#travelling-salesman-problem" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="A Practical Introduction to the Theory of Mathematical Optimization" class="md-header__button md-logo" aria-label="A Practical Introduction to the Theory of Mathematical Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            A Practical Introduction to the Theory of Mathematical Optimization
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Travelling Salesman Problem
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to dark-mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark-mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light-mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light-mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="A Practical Introduction to the Theory of Mathematical Optimization" class="md-nav__button md-logo" aria-label="A Practical Introduction to the Theory of Mathematical Optimization" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    A Practical Introduction to the Theory of Mathematical Optimization
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization problems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimization problems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../intro/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../intro/scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constraint Programming (CP)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Constraint Programming (CP)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cp/cp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cp/sudoku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sudoku
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cp/queens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    n-queens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cp/scheduling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cp/rectangle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rectangle packing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integer programming (MIP)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integer programming (MIP)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction (LP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mip/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction (MIP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sudoku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sudoku
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    n-queens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Travelling Salesman Problem
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Travelling Salesman Problem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dantzig-fulkerson-johnson-dfj-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dantzig-Fulkerson-Johnson (DFJ) formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dantzig-Fulkerson-Johnson (DFJ) formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subtour-elimination-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subtour elimination constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraint-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraint generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#miller-tucker-zemlin-mtz-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Miller-Tucker-Zemlin (MTZ) formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Miller-Tucker-Zemlin (MTZ) formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtour-elimination-constraints_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subtour elimination constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifted-inequalities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifted inequalities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branch-and-cut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch-and-cut
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gavishgraves-gg-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gavish–Graves (GG) formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gavish–Graves (GG) formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtour-elimination-constraints_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subtour elimination constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercises
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../singlemachine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Single Machine Scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallelmachines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parallel Machine Scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binpacking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bin Packing Problem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../puzzles/puzzles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Puzzles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elte/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    For my students 🇭🇺
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dantzig-fulkerson-johnson-dfj-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dantzig-Fulkerson-Johnson (DFJ) formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dantzig-Fulkerson-Johnson (DFJ) formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subtour-elimination-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subtour elimination constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraint-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraint generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#miller-tucker-zemlin-mtz-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Miller-Tucker-Zemlin (MTZ) formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Miller-Tucker-Zemlin (MTZ) formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtour-elimination-constraints_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subtour elimination constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifted-inequalities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifted inequalities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branch-and-cut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch-and-cut
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gavishgraves-gg-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gavish–Graves (GG) formulation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gavish–Graves (GG) formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtour-elimination-constraints_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subtour elimination constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercises
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:big-m-formulation" class="md-tag">big-M formulation</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:branch-and-cut" class="md-tag">branch-and-cut</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:constraint-generation" class="md-tag">constraint generation</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:lifting-inequalities" class="md-tag">lifting inequalities</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:mip" class="md-tag">mip</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="travelling-salesman-problem">Travelling Salesman Problem<a class="headerlink" href="#travelling-salesman-problem" title="Permanent link">&para;</a></h1>
+<p>Given a directed graph <span class="arithmatex">\(D=(V,A)\)</span> and a cost function <span class="arithmatex">\(c: A\to \mathbb{R}\)</span> defined on the arcs, the goal is to find a minimum-cost tour that visits every node exactly once (i.e., a Hamiltonian cycle).</p>
+<p>In the following sections, we investigate several MIP formulations for the problem.
+Meanwhile, we will become familiar with concepts such as <em>constraint generation</em>, <em>extended formulation</em>, <em>big-M formulation</em>, <em>lifting inequalities</em>, <em>branch-and-cut</em>, etc.</p>
+<div class="admonition quote">
+<p class="admonition-title">Classification of MIP formulations for the TSP</p>
+<p>Langevin, A., Soumis, F., &amp; Desrosiers, J. (1990).
+<em>Classification of travelling salesman problem formulations</em>.
+Operations Research Letters, 9(2), 127-132.</p>
+</div>
+<div class="admonition quote">
+<p class="admonition-title">Comparison of MIP formulations for the TSP</p>
+<p>Bazrafshan, R., Hashemkhani Zolfani, S., &amp; Mirzapour Al-e-hashem, S. M. J. (2021).
+<em>Comparison of the sub-tour elimination methods for the asymmetric traveling salesman problem applying the SECA method</em>.
+Axioms, 10(1), 19.</p>
+</div>
+<h2 id="basic-formulation">Basic formulation<a class="headerlink" href="#basic-formulation" title="Permanent link">&para;</a></h2>
+<h3 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h3>
+<p>Let the binary variable <span class="arithmatex">\(\mathbf{x}_{ij}\)</span> indicate whether arc <span class="arithmatex">\((i,j) \in A\)</span> is included in the tour.</p>
+<p>Note that the notation <span class="arithmatex">\(\mathbf{x}_{(i,j)}\)</span> (and <span class="arithmatex">\(c_{(i,j)}\)</span>) would be more precise, however, we can assume that the graph is simple and thus has no multiple edges.</p>
+<h3 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h3>
+<p>The objective — to minimize the cost of the tour — is straightforward:</p>
+<div class="arithmatex">\[
+\operatorname{minimize}\ \sum_{(i,j)\in A} c_{ij}\mathbf{x}_{ij}
+\]</div>
+<h3 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
+<p>Each node is visited exactly once, that is, there is exactly one incoming and one outgoing arc:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\sum_{j:\ (j,i)\in A} \mathbf{x}_{ji} = 1 &amp; &amp;\text{for all}\ i\in V\\
+\sum_{j:\ (i,j)\in A} \mathbf{x}_{ij} = 1 &amp; &amp;\text{for all}\ i\in V
+\end{align*}
+\]</div>
+<p>If we solve the problem with only these constraints, the result may not be a single Hamiltonian tour, but rather a set of <em>subtours</em>.
+Therefore, we need to add some kind of <strong>subtour elimination constraints</strong> (<em>SECs</em>), see the next sections.</p>
+<h2 id="dantzig-fulkerson-johnson-dfj-formulation">Dantzig-Fulkerson-Johnson (DFJ) formulation<a class="headerlink" href="#dantzig-fulkerson-johnson-dfj-formulation" title="Permanent link">&para;</a></h2>
+<div class="admonition quote">
+<p class="admonition-title">Dantzig-Fulkerson-Johnson (DFJ) formulation</p>
+<p>Dantzig, G., Fulkerson, R., &amp; Johnson, S. (1954).
+<em>Solution of a large-scale traveling-salesman problem.</em>
+Journal of the operations research society of America, 2(4), 393-410.</p>
+</div>
+<h3 id="subtour-elimination-constraints">Subtour elimination constraints<a class="headerlink" href="#subtour-elimination-constraints" title="Permanent link">&para;</a></h3>
+<p>We can ensure that the tour leaves every non-empty proper subset of nodes by adding exponentially many constraints:</p>
+<div class="arithmatex">\[
+\sum_{(i,j)\in A:\ i\in S,\ j\notin S} \mathbf{x}_{ij} \geq 1 \quad \text{for all}\ \emptyset\neq S \subsetneq V
+\]</div>
+<p>Equivalently (since <span class="arithmatex">\(\sum_{i\in S} \sum_{j:\ (i,j)\in A} \mathbf{x}_{ij} = |S|\)</span>):</p>
+<div class="arithmatex">\[
+\sum_{(i,j)\in A:\ i\in S,\ j\in S} \mathbf{x}_{ij} \leq |S|-1 \quad \text{for all}\ \emptyset\neq S \subsetneq V
+\]</div>
+<h3 id="constraint-generation">Constraint generation<a class="headerlink" href="#constraint-generation" title="Permanent link">&para;</a></h3>
+<p>Actually, we do not need to include these constraints for <em>all</em> subsets of nodes.
+Instead, we can apply an iterative solution procedure, similar to the one used for the <a href="../queens/">n-queens problem</a> (although the goal there was different).</p>
+<p>Specifically, we first solve the problem without any subtour elimination constraints.
+If, by luck, the result is a single Hamiltonian tour, we can stop.
+Otherwise, we identify the subtours in the current solution, add the corresponding elimination constraints to the model, and re-solve the problem.
+This procedure is repeated until the solution consists of a single tour.</p>
+<pre class="mermaid"><code>flowchart LR
+    A([start]) --&gt; B[build model&lt;br/&gt;without SECs]
+    B --&gt; C[solve]
+    C --&gt; D{single tour?}
+    D -- yes --&gt; E([stop])
+    D -- no --&gt; F["Add SECs&lt;br/&gt;for the resulted subtours"]
+    F --&gt; C</code></pre>
+<h2 id="miller-tucker-zemlin-mtz-formulation">Miller-Tucker-Zemlin (MTZ) formulation<a class="headerlink" href="#miller-tucker-zemlin-mtz-formulation" title="Permanent link">&para;</a></h2>
+<div class="admonition quote">
+<p class="admonition-title">Miller-Tucker-Zemlin (MTZ) formulation</p>
+<p>Miller, C. E., Tucker, A. W., &amp; Zemlin, R. A. (1960).
+<em>Integer programming formulation of traveling salesman problems.</em>
+Journal of the ACM (JACM), 7(4), 326-329.</p>
+</div>
+<p>In the DFJ formulation, we worked only with the <span class="arithmatex">\(\mathbf{x}\)</span>-variables, that is, in the <em>original variable space</em>.
+Now, we consider an <strong>extended formulation</strong> for the TSP, where we introduce auxiliary variables.
+The trade-off is that, although we have more variables, only a polynomial number of subtour elimination constraints is needed.</p>
+<h3 id="variables_1">Variables<a class="headerlink" href="#variables_1" title="Permanent link">&para;</a></h3>
+<p>Let the continous variable <span class="arithmatex">\(\mathbf{y}_i\)</span> indicate the sequence number of the node <span class="arithmatex">\(i\)</span> in the tour.</p>
+<div class="arithmatex">\[
+0 \leq \mathbf{y}_i \leq n-1 \quad\ \text{for all}\ i\in V
+\]</div>
+<h3 id="subtour-elimination-constraints_1">Subtour elimination constraints<a class="headerlink" href="#subtour-elimination-constraints_1" title="Permanent link">&para;</a></h3>
+<p>Let us fix an arbitrary start node, say <span class="arithmatex">\(s\)</span>:</p>
+<div class="arithmatex">\[
+\mathbf{y}_s = 0
+\]</div>
+<p>We need to ensure that if an arc <span class="arithmatex">\((i,j)\)</span> with <span class="arithmatex">\(j \neq s\)</span> is included in the tour, then the sequence number of node <span class="arithmatex">\(j\)</span> is greater than that of node <span class="arithmatex">\(i\)</span>:</p>
+<div class="arithmatex">\[
+\mathbf{x}_{ij} = 1\ \to\ \mathbf{y}_i + 1 \leq \mathbf{y}_j \quad\ \text{for all}\ (i,j) \in A: j \neq s
+\]</div>
+<p>By this, the solution will be a single tour.
+Otherwise, there is a subtour that does not contain the start node <span class="arithmatex">\(s\)</span>, say <span class="arithmatex">\(i_1 \to i_2 \to \ldots \to i_k \to i_1\)</span>.
+Then, <span class="arithmatex">\(\mathbf{y}_{i_1} &lt; \mathbf{y}_{i_2} &lt; \ldots &lt; \mathbf{y}_{i_k} &lt; \mathbf{y}_{i_1}\)</span>, which is a contradiction.</p>
+<p>Also note that in any integral solution, each <span class="arithmatex">\(\mathbf{y}\)</span>-variable also takes an integral value (from <span class="arithmatex">\(0,1,\ldots,n−1\)</span>).
+And thus, if <span class="arithmatex">\(\mathbf{x}_{ij} = 1\)</span> (<span class="arithmatex">\(j \neq s\)</span>), then <span class="arithmatex">\(\mathbf{y}_i + 1 = \mathbf{y}_j\)</span>.
+That is why we can define <span class="arithmatex">\(\mathbf{y}\)</span>-variables as continous variables.</p>
+<div class="admonition tip">
+<p class="admonition-title">Implicit integer variables</p>
+<p>Certain solvers (e.g. SCIP) support the definition of implicit integer variables.
+A continuous variable is called an implicit integer variable if it is guaranteed to take an integer solution value in every optimal solution to every remaining subproblem after fixing all integer variables of the problem.
+Implicit integer variables are not considered for branching, but their integrality properties can still be exploited in other components of the solver, such as presolve, propagation, etc.</p>
+<p>Google OR-Tools MathOpt does not provide the possibility to define implicit integer variables.</p>
+</div>
+<p>The only problem is that the implication above is not a linear constraint.
+To linearize it, we apply <strong>big-M type constraints</strong>:</p>
+<div class="arithmatex">\[
+\mathbf{y}_i + 1 \leq \mathbf{y}_j + \operatorname{M}(1 - \mathbf{x}_{ij}) \quad\ \text{for all}\ (i,j) \in A: j \neq s
+\]</div>
+<p>where <span class="arithmatex">\(\operatorname{M}\)</span> is an appropriately big constant.
+By this, if <span class="arithmatex">\(\mathbf{x}_{ij} = 1\)</span> in the solution, we have <span class="arithmatex">\(\mathbf{y}_i + 1 \leq \mathbf{y}_j\)</span>, which is exactly what we want.
+Otherwise, if <span class="arithmatex">\(\mathbf{x}_{ij} = 0\)</span>, the big-M term makes the constraint redundant, so it is always satisfied.</p>
+<div class="admonition note">
+<p class="admonition-title">A note on Big-M formulations</p>
+<p>Big-M formulations are simple to use, however, they have several disadvateges.
+The main issue is that the linear programming relaxation of a big-M constraint is often very weak.
+Even if we use the smallest possible value for the contant M, the constraint still allows a wide range of feasible values when the binary variable is fractional but close to an integer (e.g., 0.9).</p>
+</div>
+<p>What is the smallest possible value for M in our case?
+The left-hand side, <span class="arithmatex">\(\mathbf{y}_i + 1\)</span>, is maximum <span class="arithmatex">\(n\)</span>, while the term <span class="arithmatex">\(\mathbf{y}_j\)</span> on the right-hand side is minimum 1.
+Thus, for <span class="arithmatex">\(\operatorname{M} = n-1\)</span>, the constraint never cuts off a feasible solution.</p>
+<p>The final version of our constraints are:</p>
+<div class="arithmatex">\[
+\mathbf{y}_i - \mathbf{y}_j + (n-1)\mathbf{x}_{ij} \leq n - 2 \quad\ \text{for all}\ (i,j) \in A: j \neq s
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">Indicator constraints</p>
+<p>Several solvers support the use of indicator constraints (a binary indicator variable together with an enforced linear constraint) to model the implications described above.
+Such constraints can usually be handled more efficiently by the solver than a big-M formulation.</p>
+<p>For example, OR-Tools MathOpt provides the method <code>add_indicator_constraint</code>.</p>
+</div>
+<h3 id="lifted-inequalities">Lifted inequalities<a class="headerlink" href="#lifted-inequalities" title="Permanent link">&para;</a></h3>
+<div class="admonition quote">
+<p class="admonition-title">Lifted MTZ inequalities</p>
+<p>Desrochers, M., &amp; Laporte, G. (1991).
+<em>Improvements and extensions to the Miller-Tucker-Zemlin subtour elimination constraints</em>.
+Operations Research Letters, 10(1), 27-36.</p>
+</div>
+<p>The MTZ SECs can be strengthed by a <a href="../mip/#lifting-inequalities">lifting procedure</a>.</p>
+<p>Consider the SEC corresponding to arc <span class="arithmatex">\((i,j)\)</span> with <span class="arithmatex">\(j\neq s\)</span>.
+Clearly, only the reverse arc variable <span class="arithmatex">\(\mathbf{x}_{ji}\)</span>, if exists, can be a candidate for lifting, since the other arcs are, in general, "independent" of <span class="arithmatex">\((i,j)\)</span>.
+Thus, we are looking for the strengthened inequality in the following form:</p>
+<div class="arithmatex">\[
+\mathbf{y}_i - \mathbf{y}_j + (n-1)\mathbf{x}_{ij} + \alpha\mathbf{x}_{ji} \leq n - 2
+\]</div>
+<p>Assume that <span class="arithmatex">\(n&gt;2\)</span>.
+If <span class="arithmatex">\(\mathbf{x}_{ji} = 0\)</span> in a solution, we obtain the original, valid inequality independently from the value of <span class="arithmatex">\(\alpha\)</span>.
+Otherwise, if <span class="arithmatex">\(\mathbf{x}_{ji} = 1\)</span>, then <span class="arithmatex">\(\mathbf{y}_i - \mathbf{y}_j = 1\)</span> and <span class="arithmatex">\((n-1)\mathbf{x}_{ij} = 0\)</span>, thus we have <span class="arithmatex">\(\alpha \leq n - 3\)</span>.</p>
+<p>Then, the lifted MTZ inequalities are:</p>
+<div class="arithmatex">\[
+\mathbf{y}_i - \mathbf{y}_j + (n-1)\mathbf{x}_{ij} + (n-3)\mathbf{x}_{ji} \leq n - 2 \quad\ \text{for all}\ (i,j) \in A: j \neq s
+\]</div>
+<p>Note that these inequalities define facets of the corresponding TSP polytope for <span class="arithmatex">\(n\geq 6\)</span>.</p>
+<h3 id="branch-and-cut">Branch-and-cut<a class="headerlink" href="#branch-and-cut" title="Permanent link">&para;</a></h3>
+<p>In the previous sections, we saw that the DFJ SECs are strong but numerous, while the MTZ SECs are few but weak.
+How can we combine their advantages?</p>
+<p>Let us take the MTZ formulation as the base model and strengthen its LP relaxation by dynamically adding DFJ subtour elimination constraints within a <a href="../mip/#branch-and-cut"><strong>branch-and-cut</strong></a> scheme.</p>
+<div class="admonition tip">
+<p class="admonition-title">Callback for branch-and-cut</p>
+<p>Several solvers support branch-and-cut callbacks that allow generating custom cuts during the global search.</p>
+<p>In OR-Tools MathOpt, a <code>SolveCallback</code> can be defined and passed to the <code>solve</code> method.
+Note that the <code>Event.MIP_NODE</code> event must also be registered.
+Also note that currently only the GUROBI and GSCIP solvers support branch-and-cut callbacks.</p>
+</div>
+<p>Assume that the solution <span class="arithmatex">\((\bar{x},\bar{y})\)</span> for the LP-relaxation of the current node problem is fractional.
+Instead of branching, we first attempt to strengthen the LP-relaxation by cutting off this fractional solution.
+To this end, we separate the DFJ SECs, that is, we look for an inequality (i.e., a non-empty subset <span class="arithmatex">\(S\)</span> of nodes) such that:</p>
+<div class="arithmatex">\[
+\sum_{(i,j)\in A:\ i\in S,\ j\notin S} \bar{x}_{ij} &lt; 1
+\]</div>
+<p>In other words, for the subset <span class="arithmatex">\(S\)</span>, the sum of <span class="arithmatex">\(\bar{x}\)</span>-values on the outgoing arcs is less than 1.</p>
+<p>Thus, the separation problem of checking whether there are such violated inequalities, can be reduced to checking whether the minimum cut in the graph with respect to arc weights <span class="arithmatex">\(\bar{x}\)</span> is less than 1.
+For this, we can check the minimum cut between all pairs of nodes.</p>
+<div class="admonition note">
+<p class="admonition-title">Separation of DFJ subtour elimination constraints</p>
+<p>Note that the proposed branch-and-cut procedure is independent of the MTZ formulation and can therefore be applied to any TSP formulation (using the <span class="arithmatex">\(\mathbf{x}\)</span> variables).</p>
+</div>
+<h2 id="gavishgraves-gg-formulation">Gavish–Graves (GG) formulation<a class="headerlink" href="#gavishgraves-gg-formulation" title="Permanent link">&para;</a></h2>
+<div class="admonition quote">
+<p class="admonition-title">Gavish–Graves (GG) formulation</p>
+<p>Gavish, B., &amp; Graves, S. C. (1978).
+<em>The travelling salesman problem and related problems</em>.</p>
+</div>
+<h3 id="variables_2">Variables<a class="headerlink" href="#variables_2" title="Permanent link">&para;</a></h3>
+<p>Let us fix an arbitrary start node, say <span class="arithmatex">\(s\)</span>.
+Each arc <span class="arithmatex">\((i,j)\)</span> with <span class="arithmatex">\(i\neq s\)</span> is associated with a non-negative variable <span class="arithmatex">\(\mathbf{z}_{ij}\)</span>.</p>
+<h3 id="subtour-elimination-constraints_2">Subtour elimination constraints<a class="headerlink" href="#subtour-elimination-constraints_2" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\begin{align*}
+\mathbf{z}_{ij} &amp;\leq (n-1)\mathbf{x}_{ij} &amp; \text{for all}\ (i,j) \in A:\ j \neq s\\
+\sum_{j:\ (i,j)\in A} \mathbf{z}_{ij} - \sum_{j \neq s:\ (j,i)\in A} \mathbf{z}_{ji} &amp;= 1 &amp; \text{for all}\ i \in V \setminus \{s\}
+\end{align*}
+\]</div>
+<p>Consider an integral solution <span class="arithmatex">\((\bar{\mathbf{x}},\bar{\mathbf{z}})\)</span> to the problem.
+Due to the first constraint, <span class="arithmatex">\(\bar{\mathbf{z}}_{ij} = 0\)</span> for each arc <span class="arithmatex">\((i,j)\)</span> not included in the subtours.
+Thus, according to the second constraint, <span class="arithmatex">\(\bar{\mathbf{z}}_{ij} + 1 \leq \bar{\mathbf{z}}_{jk}\)</span> for each pair of arcs <span class="arithmatex">\((i,j)\)</span> and <span class="arithmatex">\((j,k)\)</span> that are consequtive in a subtour.
+Similarly to the MTZ formulation, since <span class="arithmatex">\(\bar{\mathbf{z}}\)</span>-values would increase infinitely in any subtour not containing node <span class="arithmatex">\(s\)</span>, the solution must be a single tour.</p>
+<p>Notice that for fixed <span class="arithmatex">\(\mathbf{x}\)</span>-values, the problem is reduced to a network flow problem with integral capacities, thus the <span class="arithmatex">\(\mathbf{z}\)</span>-variables also takes integer values.</p>
+<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
+<p>The implementation of the models can be found in <a href="https://github.com/hmarko89/mathoptintro/blob/master/src/tsp_mip.py" target="_blank"><code>tsp_mip.py</code></a></p>
+<h3 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Implement the Gravish-Graves formulation in function <code>solve_tsp_gg</code>.</p>
+</li>
+<li>
+<p>Implement the branch-and-cut procedure for the Gravish-Graves formulation that separates the DFJ subtour elimination constraints.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../queens/" class="md-footer__link md-footer__link--prev" aria-label="Previous: n-queens">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                n-queens
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../singlemachine/" class="md-footer__link md-footer__link--next" aria-label="Next: Single Machine Scheduling">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Single Machine Scheduling
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.footer"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../assets/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

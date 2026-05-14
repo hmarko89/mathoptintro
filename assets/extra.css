@@ -1,0 +1,59 @@
+/* --- Universal fix for equation horizontal scrollbars --- */
+
+/* KaTeX display block */
+.katex-display,
+.katex-display .katex {
+  overflow-x: visible !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+/* KaTeX inner canvas */
+.katex,
+.katex > .katex-html,
+.katex > .katex-svg {
+  max-width: 100% !important;
+  overflow: visible !important;
+}
+
+/* MathJax CHTML fallback (if present) */
+mjx-container[jax="CHTML"][display="true"],
+mjx-container {
+  overflow-x: visible !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+/* Common MkDocs Material wrappers */
+.md-typeset__scrollwrap,
+.md-typeset__scrollwrap > *,
+.md-typeset,
+.md-typeset > * {
+  overflow-x: visible !important;
+}
+
+/* Generic fallback for any ancestor that forces scrolling */
+article, .md-content, .md-typeset, .wy-nav-content, .wy-nav-content-inner {
+  overflow-x: visible !important;
+}
+
+/* Make inline formula boxes wrap better */
+.katex-display .katex, .math.display, .arithmatex {
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+/* SVGs from KaTeX/MathJax responsive */
+.katex-display svg, mjx-container svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* force monospace for all pre/code in admonitions */
+.md-typeset pre code {
+    font-family: monospace !important;
+    white-space: pre !important;
+}
